@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 
-const getSelectors = (value) => {
+const getGoalsSelectors = (value) => {
 
     switch (value) {
         case 'isAddGoal':
@@ -21,4 +21,4 @@ const getSelectors = (value) => {
 }
 
 
-export default getSelectors
+export default getGoalsSelectors

@@ -1,7 +1,9 @@
-import { CHANGE_SEARCH_FIELD } from './constants'
-import { CHANGE_IS_ADD_GOAL } from './constants'
-import { CHANGE_ENTERED_GOAL } from './constants'
-import { SET_ALL_GOALS } from './constants'
+import {
+    CHANGE_SEARCH_FIELD,
+    CHANGE_IS_ADD_GOAL,
+    CHANGE_ENTERED_GOAL,
+    SET_ALL_GOALS
+} from '../constants'
 
 
 export const setSearchFieldAction = (text, dispatch) => {
@@ -18,14 +20,14 @@ export const setIsAddGoalAction = (boolean, dispatch) => {
     })
 }
 
-export const setEnteredGoalAction = (goal, dispatch)=>{
+export const setEnteredGoalAction = (goal, dispatch) => {
     dispatch({
         type: CHANGE_ENTERED_GOAL,
         payload: goal
     })
 }
 
-export const setAllGoalsAction = (goals, dispatch)=>{
+export const setAllGoalsAction = (goals, dispatch) => {
     dispatch({
         type: SET_ALL_GOALS,
         payload: goals

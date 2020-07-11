@@ -1,16 +1,16 @@
 import React from 'react';
 import axios from 'axios'
 import { StyleSheet, View, TextInput, Button, Modal } from 'react-native';
-import { setIsAddGoalAction, setEnteredGoalAction } from '../redux/actions'
+import { setIsAddGoalAction, setEnteredGoalAction } from '../redux/actions/goalsActions'
 import { useDispatch } from 'react-redux'
-import getSelectors from '../redux/selectors'
+import goalsSelectors from '../redux/selectors/goalsSelectors'
 import { addGoal } from '../services/services'
 
 const GoalInput = props => {
 
     const dispatch = useDispatch()
-    const isAddGoal = getSelectors('isAddGoal')
-    const enteredGoal = getSelectors('enteredGoal')
+    const isAddGoal = goalsSelectors('isAddGoal')
+    const enteredGoal = goalsSelectors('enteredGoal')
 
     const changeIsAddGoal = (boolean) => {
         setIsAddGoalAction(boolean, dispatch)

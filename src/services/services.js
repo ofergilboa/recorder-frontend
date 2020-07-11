@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { setIsAddGoalAction, setAllGoalsAction } from '../redux/actions'
+import { setIsAddGoalAction, setAllGoalsAction } from '../redux/actions/goalsActions'
 
 export const route = 'http://10.0.2.2:8181/'
 
 export const getAllGoals = async (dispatch) => {
-    console.log('getting all goals')
+    // console.log('getting all goals')
     let res = await axios.get(`${route}items`)
     const goals = res.data
     setAllGoalsAction(goals, dispatch)

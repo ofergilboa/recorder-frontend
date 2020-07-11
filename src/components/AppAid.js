@@ -4,7 +4,7 @@ import GoalInput from './GoalInput'
 import SearchGoals from './SearchGoals'
 import GoalItems from './GoalItems'
 import { useDispatch } from 'react-redux'
-import { setIsAddGoalAction } from '../redux/actions'
+import { setIsAddGoalAction } from '../redux/actions/goalsActions'
 import { getAllGoals } from '../services/services'
 import Recorded from './Recorded'
 

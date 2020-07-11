@@ -3,7 +3,7 @@ import {
     CHANGE_IS_ADD_GOAL,
     CHANGE_ENTERED_GOAL,
     SET_ALL_GOALS
-} from './constants'
+} from '../constants'
 
 const initialState = {
     goals: [],

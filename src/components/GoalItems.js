@@ -1,13 +1,13 @@
 import React from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native';
 import GoalItem from './GoalItem';
-import getSelectors from '../redux/selectors'
+import getGoalsSelectors from '../redux/selectors/goalsSelectors'
 
 
 const GoalItems = props => {
 
-    const searchField = getSelectors('searchField')
-    const goals = getSelectors('goals')
+    const searchField = getGoalsSelectors('searchField')
+    const goals = getGoalsSelectors('goals')
 
     const filteredGoals = goals.filter(g => g.item.includes(searchField))
 

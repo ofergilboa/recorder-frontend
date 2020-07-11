@@ -1,7 +1,7 @@
 import React from 'react'
 import { TextInput, View, StyleSheet, Text } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { setSearchFieldAction } from '../redux/actions'
+import { setSearchFieldAction } from '../redux/actions/goalsActions'
 
 const SearchGoals = () => {
 
