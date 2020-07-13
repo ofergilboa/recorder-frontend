@@ -1,7 +1,6 @@
 import {
    IS_RECORDING,
    SET_RECORDING,
-   SET_ALL_RECORDINGS
 } from '../constants'
 
 
@@ -9,13 +8,6 @@ export const setIsRecordingAction = (boolean, dispatch) => {
     dispatch({
         type: IS_RECORDING,
         payload: boolean
-    })
-}
-
-export const setAllRecordingsAction = (array, dispatch) => {
-    dispatch({
-        type: SET_ALL_RECORDINGS,
-        payload: array
     })
 }
 

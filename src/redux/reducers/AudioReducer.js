@@ -17,7 +17,7 @@ export const AudioReducer = (state = initialState, action = {}) => {
             return { ...state, isPlaying: action.payload }
 
         case SET_ALL_AUDIO:
-            return { ...state, allAudios: action.payload }
+            return { ...state, allAudios: [...state.allAudios, action.payload] }
 
         case SET_AUDIO:
             return { ...state, audio: action.payload }

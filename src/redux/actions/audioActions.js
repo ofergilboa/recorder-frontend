@@ -12,10 +12,10 @@ export const setIsPlayingAction = (boolean, dispatch) => {
     })
 }
 
-export const setAllAudioAction = (array, dispatch) => {
+export const setAllAudioAction = (obj, dispatch) => {
     dispatch({
         type: SET_ALL_AUDIO,
-        payload: array
+        payload: obj
     })
 }
 

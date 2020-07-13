@@ -7,7 +7,6 @@ import {
 const initialState = {
     isRecording: false,
     recording: {},
-    allRecordings: []
 }
 
 export const RecordReducer = (state = initialState, action = {}) => {
@@ -15,9 +14,6 @@ export const RecordReducer = (state = initialState, action = {}) => {
 
         case IS_RECORDING:
             return { ...state, isRecording: action.payload }
-
-        case SET_ALL_RECORDINGS:
-            return { ...state, allRecordings: action.payload }
 
         case SET_RECORDING:
             return { ...state, recording: action.payload }

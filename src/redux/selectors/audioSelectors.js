@@ -2,24 +2,22 @@ import { useSelector } from 'react-redux'
 
 const getAudioSelectors = (value) => {
 
-
     switch (value) {
         case 'isPlaying':
             return (useSelector(state => (
-                state.RecordReducer.isPlaying)))
+                state.AudioReducer.isPlaying)))
 
         case 'allAudios':
             return (useSelector(state => (
-                state.RecordReducer.allAudios)))
+                state.AudioReducer.allAudios)))
 
         case 'audio':
             return (useSelector(state => (
-                state.RecordReducer.audio)))
+                state.AudioReducer.audio)))
 
         default:
             return value
     }
 }
-
 
 export default getAudioSelectors

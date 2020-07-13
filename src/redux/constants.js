@@ -5,7 +5,6 @@ export const CHANGE_ENTERED_GOAL = 'CHANGE_ENTERED_GOAL'
 export const SET_ALL_GOALS = 'SET_ALL_GOALS'
 
 //recordings
-export const SET_RECORDINGS = 'SET_RECORDINGS'
 export const IS_RECORDING = 'IS_RECORDING'
 export const SET_RECORDING = 'SET_RECORDING'
 

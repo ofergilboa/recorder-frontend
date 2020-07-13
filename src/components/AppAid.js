@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { setIsAddGoalAction } from '../redux/actions/goalsActions'
 import { getAllGoals } from '../services/services'
 import Recorded from './Recorded'
+import Audios from './Audios'
 
 const AppAid = () => {
 
@@ -19,6 +20,7 @@ const AppAid = () => {
             <SearchGoals />
             <Button title="add a goal" onPress={() => setIsAddGoalAction(true, dispatch)} />
             <Recorded/>
+            <Audios/>
             <GoalInput />
             <GoalItems />
         </View >

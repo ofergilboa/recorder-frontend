@@ -3,6 +3,8 @@ import { setIsAddGoalAction, setAllGoalsAction } from '../redux/actions/goalsAct
 
 export const route = 'http://10.0.2.2:8181/'
 
+//goals
+
 export const getAllGoals = async (dispatch) => {
     // console.log('getting all goals')
     let res = await axios.get(`${route}items`)
@@ -22,4 +24,16 @@ export const addGoal = async (goalTitle, dispatch) => {
 export const deleteGoal = async (id, dispatch) => {
     await axios.delete(`${route}item/${id}`)
     getAllGoals(dispatch)
+}
+
+
+//audio
+
+export const saveAudioToDB = async (obj) => {
+    const saveAudio = {
+        "type": "audio",
+        "duration": obj._finalDurationMillis,
+        "sound": obj.sound
+    }
+    await axios.post(`${route}audio`, saveAudio)
 }

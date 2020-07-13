@@ -7,10 +7,6 @@ const getRecordSelectors = (value) => {
             return (useSelector(state => (
                 state.RecordReducer.isRecording)))
 
-        case 'allRecordings':
-            return (useSelector(state => (
-                state.RecordReducer.allRecordings)))
-
         case 'recording':
             return (useSelector(state => (
                 state.RecordReducer.recording)))
