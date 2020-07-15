@@ -1,18 +1,20 @@
 import React from 'react'
 import { Audio } from 'expo-av'
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux'
 import getAudioSelectors from '../redux/selectors/audioSelectors';
 import { setAudioAction, setIsPlayingAction, setAllAudioAction } from '../redux/actions/audioActions'
 import { setRecordSettings } from '../services/audioSettings'
 import { saveAudioToDB } from '../services/services'
+const moment = require('moment')
+require('moment/locale/en-il')
+moment.locale('en-il')
 
 
 const Recorded = () => {
 
     const dispatch = useDispatch()
     let audio = getAudioSelectors('audio')
-    // let allAudios = getAudioSelectors('allAudios')
     let recording = {}
 
     const startRecording = async () => {
@@ -34,36 +36,48 @@ const Recorded = () => {
         console.log('3: stopped recording: ' + recording._finalDurationMillis)
 
         let tempAudio = await recording.createNewLoadedSoundAsync()
-        tempAudio ={
+        tempAudio = {
             sound: tempAudio.sound,
-            duration : (recording._finalDurationMillis / 1000).toFixed(1),
-            language: 'default language',
-            genre: 'default genre',
-            title: 'default title'
+            duration: (recording._finalDurationMillis / 1000).toFixed(1),
+            language: 'English',
+            genre: 'all',
+            title: 'title',
+            id: Math.random().toString(),
+            date: moment().format('l'),
+            hour: moment().format('LTS')
         }
-        // tempAudio.duration = (recording._finalDurationMillis / 1000).toFixed(1)
-
         await setAudioAction(tempAudio, dispatch)
-        // await setAllAudioAction(audio, dispatch)
 
+        // await setAllAudioAction(audio, dispatch)
         // saveAudioToDB(audio)   
     }
 
 
     return (
-        <View>
-            <Text></Text>
+        <View style={styles.recordBar}>
             <Text onPress={() => startRecording()}>
                 record
             </Text>
-            <Text></Text>
             <Text onPress={() => stopRecording()}>
                 stop recording
             </Text>
-            <Text></Text>
-
+            <Text onPress={() => setAllAudioAction(audio, dispatch)}>
+                save
+            </Text>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    recordBar: {
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        backgroundColor: "#b0c4de",
+        borderRadius: 4,
+        flexDirection: "row",
+        justifyContent: "space-between",
+
+    }
+})
 
 export default Recorded

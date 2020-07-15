@@ -14,7 +14,7 @@ const SearchGoals = () => {
     return (
         <View style={styles.searchInput}>
             <TextInput
-                placeholder='search for a goal'
+                placeholder='search title'
                 onChangeText={handleChange}
             />
         </View>
@@ -25,11 +25,13 @@ const styles = StyleSheet.create({
     searchInput: {
         width: '100%',
         borderWidth: 3,
-        borderColor: "lightsteelblue",
+        borderColor: "#b0c4de",
         marginTop: 20,
         marginBottom: 10,
         padding: 2,
-        paddingLeft: 20,
+        paddingLeft: 10,
+        borderRadius: 4,
+
     }
 })
 

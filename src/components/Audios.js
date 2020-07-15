@@ -1,6 +1,6 @@
 import React from 'react'
 import { Audio } from 'expo-av'
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, FlatList } from 'react-native';
 import { useDispatch } from 'react-redux'
 import getAudioSelectors from '../redux/selectors/audioSelectors';
 import { setAudioAction, setIsPlayingAction, setAllAudioAction } from '../redux/actions/audioActions'
@@ -28,35 +28,60 @@ const Audios = () => {
     }
 
     const playAudio = async () => {
-        await setAllAudioAction(audio, dispatch)
+        // await setAllAudioAction(audio, dispatch)
         await audio.sound.playAsync()
-        console.log('4: playing')
-        console.log(`5: duration: ${audio.duration} seconds`)
+        console.log(`4: playing: ${audio.duration} seconds`)
+
+        // saveAudioToDB(audio)   
     }
 
     const stopAudio = async () => {
-        console.log(`6: ${allAudios[0].duration}`)
         audio.sound.pauseAsync()
-        console.log('7: stopped plying')
+        console.log('5: stopped plying')
     }
 
     return (
         <View>
-            <Text onPress={() => getAudio()}>
+            <View style={styles.audioBar}>
+                {/* <Text onPress={() => getAudio()}>
                 get audio
+            </Text> */}
+                <Text onPress={() => playAudio()}>
+                    play audio
             </Text>
-            <Text></Text>
-            <Text onPress={() => playAudio()}>
-                play audio
+                <Text onPress={() => stopAudio()}>
+                    stop audio
             </Text>
-            <Text></Text>
-            <Text onPress={() => stopAudio()}>
-                stop audio
-            </Text>
-            <Text></Text>
-            {allAudios.map((audio, i) => <AudioObj audio={audio} key={i} />)}
+            </View>
+            <View style={styles.allAudios}>
+                {allAudios[0]
+                    ? <FlatList
+                        data={allAudios}
+                        renderItem={(audio) => <AudioObj audio={audio} />}
+                        keyExtractor={audio => { audio.id }}
+                    />
+                    // ? <ScrollView>{allAudios.map((audio, i) => <AudioObj audio={audio} key={i} />)}</ScrollView>
+                    : <Text>no audios recorded yet</Text>
+                }
+            </View>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    audioBar: {
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        backgroundColor: "#b0c4de",
+        borderRadius: 4,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 10,
+        marginBottom: 15,
+    },
+    allAudios:{
+        height: '77%'
+    }
+})
 
 export default Audios

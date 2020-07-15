@@ -9,7 +9,7 @@ const GoalItems = props => {
     const searchField = getGoalsSelectors('searchField')
     const goals = getGoalsSelectors('goals')
 
-    const filteredGoals = goals.filter(g => g.item.includes(searchField))
+    const filteredGoals = goals[0] ? goals.filter(g => g.item.includes(searchField)) : []
 
     return (
         <ScrollView style={styles.listItems}>
@@ -18,8 +18,8 @@ const GoalItems = props => {
                     item={goal.item}
                     id={goal.key}
                     key={goal.key}
-                >
-                </GoalItem>))
+                />
+            ))
             }
         </ScrollView>
     )
