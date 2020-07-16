@@ -2,20 +2,20 @@ import React from 'react'
 import { Audio } from 'expo-av'
 import { Text, View, ScrollView, StyleSheet, FlatList } from 'react-native';
 import { useDispatch } from 'react-redux'
-import getAudioSelectors from '../redux/selectors/audioSelectors';
-import { setAudioAction, setIsPlayingAction, setAllAudioAction } from '../redux/actions/audioActions'
-import { setRecordSettings } from '../services/audioSettings'
-import { saveAudioToDB } from '../services/services'
+import getAudioSelectors from '../../redux/selectors/audioSelectors';
+import { setAudioAction, setIsPlayingAction, setAllAudioAction, addAudioAction } from '../../redux/actions/audioActions'
+import { setRecordSettings } from '../../services/audioSettings'
+import { saveAudioToDB } from '../../services/services'
 import AudioObj from './AudioObj';
 
-const Audios = () => {
+const AudioBar = () => {
 
     const dispatch = useDispatch()
     let audio = getAudioSelectors('audio')
     let allAudios = getAudioSelectors('allAudios')
 
     const getAudio = async () => {
-        let source = require('../assets/SoundHelix-Song-2.mp3')
+        // let source = require('../../assets/SoundHelix-Song-2.mp3')
         // let source = { uri: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' }
         // let source = require(uri)
         audio = new Audio.Sound()
@@ -28,7 +28,7 @@ const Audios = () => {
     }
 
     const playAudio = async () => {
-        // await setAllAudioAction(audio, dispatch)
+        // await addAudioAction(audio, dispatch)
         await audio.sound.playAsync()
         console.log(`4: playing: ${audio.duration} seconds`)
 
@@ -53,17 +53,6 @@ const Audios = () => {
                     stop audio
             </Text>
             </View>
-            <View style={styles.allAudios}>
-                {allAudios[0]
-                    ? <FlatList
-                        data={allAudios}
-                        renderItem={(audio) => <AudioObj audio={audio} />}
-                        keyExtractor={audio => { audio.id }}
-                    />
-                    // ? <ScrollView>{allAudios.map((audio, i) => <AudioObj audio={audio} key={i} />)}</ScrollView>
-                    : <Text>no audios recorded yet</Text>
-                }
-            </View>
         </View>
     )
 }
@@ -80,8 +69,8 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     allAudios:{
-        height: '77%'
+        maxHeight: '77%'
     }
 })
 
-export default Audios
+export default AudioBar

@@ -1,7 +1,8 @@
 import {
     IS_PLAYING,
     SET_ALL_AUDIO,
-    SET_AUDIO
+    SET_AUDIO,
+    ADD_AUDIO
 } from '../constants'
 
 
@@ -22,6 +23,13 @@ export const setAllAudioAction = (obj, dispatch) => {
 export const setAudioAction = (obj, dispatch) => {
     dispatch({
         type: SET_AUDIO,
+        payload: obj
+    })
+}
+
+export const addAudioAction = (obj, dispatch) => {
+    dispatch({
+        type: ADD_AUDIO,
         payload: obj
     })
 }

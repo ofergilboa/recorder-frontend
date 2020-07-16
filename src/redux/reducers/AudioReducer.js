@@ -1,7 +1,8 @@
 import {
     IS_PLAYING,
     SET_ALL_AUDIO,
-    SET_AUDIO
+    SET_AUDIO,
+    ADD_AUDIO
 } from '../constants'
 
 const initialState = {
@@ -17,6 +18,9 @@ export const AudioReducer = (state = initialState, action = {}) => {
             return { ...state, isPlaying: action.payload }
 
         case SET_ALL_AUDIO:
+            return { ...state, allAudios: action.payload }
+
+        case ADD_AUDIO:
             return { ...state, allAudios: [...state.allAudios, action.payload] }
 
         case SET_AUDIO:

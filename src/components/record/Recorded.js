@@ -1,11 +1,11 @@
 import React from 'react'
 import { Audio } from 'expo-av'
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux'
-import getAudioSelectors from '../redux/selectors/audioSelectors';
-import { setAudioAction, setIsPlayingAction, setAllAudioAction } from '../redux/actions/audioActions'
-import { setRecordSettings } from '../services/audioSettings'
-import { saveAudioToDB } from '../services/services'
+import getAudioSelectors from '../../redux/selectors/audioSelectors';
+import { setAudioAction, setIsPlayingAction, setAllAudioAction, addAudioAction } from '../../redux/actions/audioActions'
+import { setRecordSettings } from '../../services/audioSettings'
+import { saveAudioToDB } from '../../services/services'
 const moment = require('moment')
 require('moment/locale/en-il')
 moment.locale('en-il')
@@ -42,28 +42,41 @@ const Recorded = () => {
             language: 'English',
             genre: 'all',
             title: 'title',
-            id: Math.random().toString(),
+            key: Math.random().toString(),
             date: moment().format('l'),
             hour: moment().format('LTS')
         }
         await setAudioAction(tempAudio, dispatch)
 
-        // await setAllAudioAction(audio, dispatch)
+        // await addAudioAction(audio, dispatch)
         // saveAudioToDB(audio)   
+    }
+
+    const save = async () => {
+        // addAudioAction(audio, dispatch)
+        saveAudioToDB(audio, dispatch)
     }
 
 
     return (
         <View style={styles.recordBar}>
-            <Text onPress={() => startRecording()}>
-                record
-            </Text>
-            <Text onPress={() => stopRecording()}>
-                stop recording
-            </Text>
-            <Text onPress={() => setAllAudioAction(audio, dispatch)}>
-                save
-            </Text>
+            <TouchableOpacity>
+                <Text onPress={startRecording}>
+                    record
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+
+                <Text onPress={stopRecording}>
+                    stop recording
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+
+                <Text onPress={save}>
+                    save
+                </Text>
+            </TouchableOpacity>
         </View>
     )
 }

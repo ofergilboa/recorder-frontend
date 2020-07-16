@@ -7,14 +7,14 @@ const AudioObj = (props) => {
     return (
         <View style={styles.audioObj}>
             <View style={styles.audioTitle}>
-                <Text style={styles.audioTitleText}>{props.audio.item.title}</Text>
-                <Text>{props.audio.item.duration}s</Text>
+                <Text style={styles.audioTitleText}>{props.audio.title}</Text>
+                <Text>{props.audio.duration}s</Text>
             </View>
             <View style={styles.audioDetails}>
-                <Text>{props.audio.item.language}</Text>
-                <Text>{props.audio.item.genre}</Text>
-                <Text>{props.audio.item.date}</Text>
-                <Text>{props.audio.item.hour ? props.audio.item.hour.slice(0, 5) : null}</Text>
+                <Text>{props.audio.language}</Text>
+                <Text>{props.audio.genre}</Text>
+                <Text>{props.audio.date}</Text>
+                <Text>{props.audio.hour ? props.audio.hour.slice(0, 5) : null}</Text>
             </View>
         </View>
 

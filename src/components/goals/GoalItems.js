@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native';
 import GoalItem from './GoalItem';
-import getGoalsSelectors from '../redux/selectors/goalsSelectors'
+import getGoalsSelectors from '../../redux/selectors/goalsSelectors'
 
 
 const GoalItems = props => {

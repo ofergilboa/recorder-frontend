@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { StyleSheet, Text, View, Touchable, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux'
-import { deleteGoal} from '../services/services'
+import { deleteGoal} from '../../services/services'
 
 
 const GoalItem = props => {
