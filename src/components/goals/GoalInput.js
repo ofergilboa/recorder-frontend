@@ -5,6 +5,8 @@ import { setIsAddGoalAction, setEnteredGoalAction } from '../../redux/actions/go
 import { useDispatch } from 'react-redux'
 import goalsSelectors from '../../redux/selectors/goalsSelectors'
 import { addGoal } from '../../services/services'
+import Recorded from '../record/Recorded';
+import AudioBar from '../audio/AudioBar';
 
 const GoalInput = props => {
 
@@ -28,6 +30,10 @@ const GoalInput = props => {
                     style={styles.input}
                     onChangeText={inputHandler}
                     value={enteredGoal} />
+                <View>
+                    <Recorded />
+                    <AudioBar />
+                </View>
                 <View style={styles.buttons}>
                     <View style={styles.button}>
                         <Button title='CANCEL' color='red'

@@ -2,6 +2,7 @@ import axios from 'axios'
 import { setIsAddGoalAction, setAllGoalsAction } from '../redux/actions/goalsActions'
 import { setAllAudioAction } from '../redux/actions/audioActions'
 
+
 export const route = 'http://10.0.2.2:8181/'
 
 //goals
@@ -48,13 +49,14 @@ export const getAllAudios = async (dispatch) => {
         console.log(error)
     }
     const audios = res.data
-    console.log(audios)
     setAllAudioAction(audios, dispatch)
     console.log('got all audios')
 }
 
 export const saveAudioToDB = async (obj, dispatch) => {
+    console.log('saving: ' + obj.sound)
     const saveAudio = {
+        // "sound": obj.sound,
         "title": obj.title,
         "date": obj.date,
         "duration": obj.duration,
@@ -62,6 +64,8 @@ export const saveAudioToDB = async (obj, dispatch) => {
         "hour": obj.hour,
         "key": obj.key,
         "language": obj.language,
+        "source": obj.source.uri,
+        "createdBy": obj.createdBy
     }
     console.log('----- saving')
     try {
@@ -70,4 +74,13 @@ export const saveAudioToDB = async (obj, dispatch) => {
         console.log(error)
     }
     getAllAudios(dispatch)
+}
+
+export const deleteAudio = async (key, dispatch) => {
+    try {
+        await axios.delete(`${route}audio/${key}`)
+        getAllAudios(dispatch)
+    } catch (error) {
+        console.log(error)
+    }
 }

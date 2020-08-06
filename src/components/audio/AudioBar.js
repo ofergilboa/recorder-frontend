@@ -31,12 +31,15 @@ const AudioBar = () => {
         // await addAudioAction(audio, dispatch)
         await audio.sound.playAsync()
         console.log(`4: playing: ${audio.duration} seconds`)
-
+        setTimeout(function () {
+            audio.sound.stopAsync()
+            console.log('stopped plying')
+        }, audio.duration * 1000)
         // saveAudioToDB(audio)   
     }
 
     const stopAudio = async () => {
-        audio.sound.pauseAsync()
+        audio.sound.stopAsync()
         console.log('5: stopped plying')
     }
 
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 15,
     },
-    allAudios:{
+    allAudios: {
         maxHeight: '77%'
     }
 })

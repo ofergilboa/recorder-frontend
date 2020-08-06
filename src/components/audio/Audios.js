@@ -40,10 +40,12 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         marginTop: 10,
-        marginBottom: 15,
+        marginBottom: 10,
     },
     allAudios:{
-        maxHeight: '77%'
+        marginBottom: -10,
+        // maxHeight: '77%',
+        // height: '75%'
     }
 })
 

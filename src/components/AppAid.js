@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { StyleSheet, View, Button } from 'react-native'
+import { StyleSheet, View, Button, ScrollView } from 'react-native'
 import GoalInput from './goals/GoalInput'
 import SearchGoals from './goals/SearchGoals'
 import GoalItems from './goals/GoalItems'
@@ -21,20 +21,23 @@ const AppAid = () => {
 
     return (
         <View style={styles.screen}>
-            <Button title="record audio" onPress={() => setIsAddGoalAction(true, dispatch)} />
+            <Button title="add an item" onPress={() => setIsAddGoalAction(true, dispatch)} />
             <SearchGoals />
-            <Recorded />
-            <AudioBar />
-            <Audios/>
-            <GoalInput />
-            <GoalItems />
+            {/* <Recorded /> */}
+            {/* <AudioBar /> */}
+            <ScrollView>
+                <Audios />
+                <GoalInput />
+                <GoalItems />
+            </ScrollView>
         </View >
     );
 }
 
 const styles = StyleSheet.create({
     screen: {
-        padding: 30,
+        paddingTop:40,
+        padding: 15,
         // paddingTop: 40,
         paddingBottom: 15,
         flex: 1

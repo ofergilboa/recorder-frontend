@@ -33,18 +33,31 @@ const Recorded = () => {
 
     const stopRecording = async () => {
         await recording.stopAndUnloadAsync()
+        let uri = await recording.getURI()
+        let source = { uri: uri }
+        console.log('111111'+ source.uri)
+
+        // console.log('0000 uri: ' + uri)
         console.log('3: stopped recording: ' + recording._finalDurationMillis)
 
-        let tempAudio = await recording.createNewLoadedSoundAsync()
+        const soundObject = new Audio.Sound()
+        await soundObject.loadAsync(source)
+        setTimeout(function () {
+            soundObject.playAsync()
+        }, 2000)
+
+        // let tempAudio = await recording.createNewLoadedSoundAsync()
         tempAudio = {
-            sound: tempAudio.sound,
+            // sound: tempAudio.sound,
             duration: (recording._finalDurationMillis / 1000).toFixed(1),
             language: 'English',
             genre: 'all',
             title: 'title',
             key: Math.random().toString(),
             date: moment().format('l'),
-            hour: moment().format('LTS')
+            hour: moment().format('LTS'),
+            source : source,
+            createdBy: 'userID'
         }
         await setAudioAction(tempAudio, dispatch)
 
@@ -60,36 +73,29 @@ const Recorded = () => {
 
     return (
         <View style={styles.recordBar}>
-            <TouchableOpacity>
-                <Text onPress={startRecording}>
-                    record
-                </Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-
-                <Text onPress={stopRecording}>
-                    stop recording
-                </Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-
-                <Text onPress={save}>
-                    save
-                </Text>
-            </TouchableOpacity>
+            <Text onPress={startRecording}>
+                record
+            </Text>
+            <Text onPress={stopRecording}>
+                stop recording
+            </Text>
+            <Text onPress={save}>
+                save
+            </Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     recordBar: {
+        marginTop: 10,
         paddingVertical: 10,
         paddingHorizontal: 15,
         backgroundColor: "#b0c4de",
-        borderRadius: 4,
+        // borderRadius: 4,
         flexDirection: "row",
         justifyContent: "space-between",
-
+        width: "80%"
     }
 })
 
