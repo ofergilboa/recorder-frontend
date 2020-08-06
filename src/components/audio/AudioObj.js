@@ -33,7 +33,7 @@ const AudioObj = (props) => {
             <View style={styles.audioTitle}>
                 <Text style={styles.audioTitleText}>{props.audio.title}</Text>
                 <View style={styles.audioPlay}>
-                    <Text onPress={() => play()}>play</Text>
+                    <Text style={styles.play} onPress={() => play()}>play</Text>
                     <Text style={styles.xButton} onPress={() => deleteAudio(props.audio.key, dispatch)}> X </Text>
                 </View>
             </View>
@@ -54,35 +54,45 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         paddingVertical: 10,
         paddingHorizontal: 15,
-        marginBottom: 10,
-        backgroundColor: "#f5f5f5",
-        borderRadius: 4,
-        minHeight: 90
+        // marginBottom: 10,
+        // backgroundColor: "#f5f5f5",
+        // borderRadius: 4,
+        minHeight: 85,
+        borderBottomWidth:1,
+        borderBottomColor: "#1e90ff",
+        borderTopColor: "#1e90ff",
+        // borderTopWidth: 1,
+
     },
     audioTitle: {
-        marginBottom: 15,
+        // marginBottom: 15,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "baseline",
     },
     audioTitleText: {
         fontSize: 22,
-        width:"75%"
+        width: "75%",
         // fontWeight:"bold"
+        fontWeight: "bold"
     },
     audioDetails: {
         flexDirection: "row",
         justifyContent: "space-between",
     },
+    play: {
+        fontWeight: "bold"
+    },
     xButton: {
         backgroundColor: "#f8f8ff",
-        borderRadius: 2
+        borderRadius: 2,
+        fontWeight: "bold"
     },
-    audioPlay:{
+    audioPlay: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "baseline",
-        width:"17%"
+        width: "17%"
     }
 })
 
