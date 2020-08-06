@@ -81,10 +81,12 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     play: {
-        fontWeight: "bold"
+        fontWeight: "bold",
+        color:"green",
     },
     xButton: {
         backgroundColor: "#f8f8ff",
+        color:"red",
         borderRadius: 2,
         fontWeight: "bold"
     },

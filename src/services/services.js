@@ -3,7 +3,8 @@ import { setIsAddGoalAction, setAllGoalsAction } from '../redux/actions/goalsAct
 import { setAllAudioAction } from '../redux/actions/audioActions'
 
 
-export const route = 'http://10.0.2.2:8181/'
+// export const route = 'http://10.0.2.2:8181/' //local
+export const route = '/' //herokus
 
 //goals
 

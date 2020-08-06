@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "react-native-guide",
-    "slug": "react-native-guide",
+    "name": "recorder app",
+    "slug": "recorder-app",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "record yourself, save it and play back later"
   }
 }
