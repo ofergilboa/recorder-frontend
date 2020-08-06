@@ -32,8 +32,10 @@ const AudioObj = (props) => {
         <View style={styles.audioObj}>
             <View style={styles.audioTitle}>
                 <Text style={styles.audioTitleText}>{props.audio.title}</Text>
-                <Text onPress={() => play()}>play</Text>
-                <Text style={styles.xButton} onPress={() => deleteAudio(props.audio.key, dispatch)}> X </Text>
+                <View style={styles.audioPlay}>
+                    <Text onPress={() => play()}>play</Text>
+                    <Text style={styles.xButton} onPress={() => deleteAudio(props.audio.key, dispatch)}> X </Text>
+                </View>
             </View>
             <View style={styles.audioDetails}>
                 <Text>{props.audio.language}</Text>
@@ -73,6 +75,12 @@ const styles = StyleSheet.create({
     xButton: {
         backgroundColor: "#f8f8ff",
         borderRadius: 2
+    },
+    audioPlay:{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "baseline",
+        width:60
     }
 })
 

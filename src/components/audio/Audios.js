@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     allAudios:{
+        marginTop: 10,
         marginBottom: -10,
         // maxHeight: '77%',
         // height: '75%'

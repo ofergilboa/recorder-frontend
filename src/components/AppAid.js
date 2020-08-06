@@ -21,7 +21,7 @@ const AppAid = () => {
 
     return (
         <View style={styles.screen}>
-            <Button title="add an item" onPress={() => setIsAddGoalAction(true, dispatch)} />
+            <Button title="add audio" onPress={() => setIsAddGoalAction(true, dispatch)} />
             <SearchGoals />
             {/* <Recorded /> */}
             {/* <AudioBar /> */}

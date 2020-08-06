@@ -65,11 +65,13 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 15,
         backgroundColor: "#b0c4de",
-        borderRadius: 4,
+        borderRadius: 0,
         flexDirection: "row",
         justifyContent: "space-between",
         marginTop: 10,
         marginBottom: 15,
+        width: "100%"
+
     },
     allAudios: {
         maxHeight: '77%'

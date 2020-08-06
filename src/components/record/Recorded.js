@@ -3,6 +3,7 @@ import { Audio } from 'expo-av'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux'
 import getAudioSelectors from '../../redux/selectors/audioSelectors';
+import goalsSelectors from '../../redux/selectors/goalsSelectors';
 import { setAudioAction, setIsPlayingAction, setAllAudioAction, addAudioAction } from '../../redux/actions/audioActions'
 import { setRecordSettings } from '../../services/audioSettings'
 import { saveAudioToDB } from '../../services/services'
@@ -15,6 +16,7 @@ const Recorded = () => {
 
     const dispatch = useDispatch()
     let audio = getAudioSelectors('audio')
+    const enteredGoal = goalsSelectors('enteredGoal')
     let recording = {}
 
     const startRecording = async () => {
@@ -42,17 +44,17 @@ const Recorded = () => {
 
         const soundObject = new Audio.Sound()
         await soundObject.loadAsync(source)
-        setTimeout(function () {
-            soundObject.playAsync()
-        }, 2000)
+        // setTimeout(function () {
+        //     soundObject.playAsync()
+        // }, 2000)
 
-        // let tempAudio = await recording.createNewLoadedSoundAsync()
+        let temp = await recording.createNewLoadedSoundAsync()
         tempAudio = {
-            // sound: tempAudio.sound,
+            sound: temp.sound,
             duration: (recording._finalDurationMillis / 1000).toFixed(1),
             language: 'English',
             genre: 'all',
-            title: 'title',
+            title: enteredGoal,
             key: Math.random().toString(),
             date: moment().format('l'),
             hour: moment().format('LTS'),
@@ -60,8 +62,7 @@ const Recorded = () => {
             createdBy: 'userID'
         }
         await setAudioAction(tempAudio, dispatch)
-
-        // await addAudioAction(audio, dispatch)
+        // await addAudioAction(tempAudio, dispatch)
         // saveAudioToDB(audio)   
     }
 
@@ -79,9 +80,9 @@ const Recorded = () => {
             <Text onPress={stopRecording}>
                 stop recording
             </Text>
-            <Text onPress={save}>
+            {/* <Text onPress={save}>
                 save
-            </Text>
+            </Text> */}
         </View>
     )
 }
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
         // borderRadius: 4,
         flexDirection: "row",
         justifyContent: "space-between",
-        width: "80%"
+        width: "100%"
     }
 })
 

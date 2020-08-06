@@ -2,9 +2,11 @@ import React from 'react';
 import axios from 'axios'
 import { StyleSheet, View, TextInput, Button, Modal } from 'react-native';
 import { setIsAddGoalAction, setEnteredGoalAction } from '../../redux/actions/goalsActions'
+import { setAudioAction } from '../../redux/actions/audioActions'
 import { useDispatch } from 'react-redux'
 import goalsSelectors from '../../redux/selectors/goalsSelectors'
-import { addGoal } from '../../services/services'
+import getAudioSelectors from '../../redux/selectors/audioSelectors'
+import { addGoal, saveAudioToDB } from '../../services/services'
 import Recorded from '../record/Recorded';
 import AudioBar from '../audio/AudioBar';
 
@@ -13,6 +15,8 @@ const GoalInput = props => {
     const dispatch = useDispatch()
     const isAddGoal = goalsSelectors('isAddGoal')
     const enteredGoal = goalsSelectors('enteredGoal')
+    let audio = getAudioSelectors('audio')
+
 
     const changeIsAddGoal = (boolean) => {
         setIsAddGoalAction(boolean, dispatch)
@@ -22,32 +26,45 @@ const GoalInput = props => {
         setEnteredGoalAction(text, dispatch)
     }
 
+    const onSave = () => {
+        // addGoal(enteredGoal, dispatch);
+        if (audio) {
+            audio.title = enteredGoal ? enteredGoal : 'name the song'
+            saveAudioToDB(audio, dispatch)
+            inputHandler('')
+            changeIsAddGoal(false)
+            setAudioAction('', dispatch)
+        } else {
+            alert('you need to record something first')
+        }
+    }
+
+    const onCancel = () => {
+        changeIsAddGoal(false);
+        inputHandler('')
+        setAudioAction('', dispatch)
+    }
+
     return (
         < Modal visible={isAddGoal} animationType={"slide"} >
             <View style={styles.topContainer}>
                 <TextInput
-                    placeholder="course goals"
+                    placeholder="what do you know about the song?"
                     style={styles.input}
                     onChangeText={inputHandler}
                     value={enteredGoal} />
-                <View>
+                <View style={styles.record}>
                     <Recorded />
                     <AudioBar />
                 </View>
                 <View style={styles.buttons}>
                     <View style={styles.button}>
                         <Button title='CANCEL' color='red'
-                            onPress={() => {
-                                changeIsAddGoal(false);
-                                inputHandler('')
-                            }} />
+                            onPress={onCancel} />
                     </View>
                     <View style={styles.button}>
-                        <Button title="ADD"
-                            onPress={() => {
-                                addGoal(enteredGoal, dispatch);
-                                inputHandler('')
-                            }}
+                        <Button title="SAVE"
+                            onPress={onSave}
                         />
                     </View>
                 </View>
@@ -81,6 +98,10 @@ const styles = StyleSheet.create({
         borderColor: "black",
         borderWidth: 1,
         padding: 10
+    },
+    record: {
+        width: '80%',
+
     }
 })
 
