@@ -14,7 +14,7 @@ const SearchGoals = () => {
     return (
         <View style={styles.searchInput}>
             <TextInput
-                placeholder='search title'
+                placeholder='search'
                 onChangeText={handleChange}
             />
         </View>

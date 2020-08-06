@@ -51,12 +51,13 @@ const AudioObj = (props) => {
 const styles = StyleSheet.create({
     audioObj: {
         flexDirection: "column",
-        alignContent: "space-between",
+        justifyContent: "space-between",
         paddingVertical: 10,
         paddingHorizontal: 15,
         marginBottom: 10,
-        backgroundColor: "#ccc",
+        backgroundColor: "#f5f5f5",
         borderRadius: 4,
+        minHeight: 90
     },
     audioTitle: {
         marginBottom: 15,
@@ -66,6 +67,7 @@ const styles = StyleSheet.create({
     },
     audioTitleText: {
         fontSize: 22,
+        width:"75%"
         // fontWeight:"bold"
     },
     audioDetails: {
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "baseline",
-        width:60
+        width:"17%"
     }
 })
 

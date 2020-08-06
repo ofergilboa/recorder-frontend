@@ -29,7 +29,8 @@ const GoalInput = props => {
     const onSave = () => {
         // addGoal(enteredGoal, dispatch);
         if (audio) {
-            audio.title = enteredGoal ? enteredGoal : 'name the song'
+            audio.title = enteredGoal ? enteredGoal : 'audio'
+            // audio.title = enteredGoal ? enteredGoal : 'name the song'
             saveAudioToDB(audio, dispatch)
             inputHandler('')
             changeIsAddGoal(false)
@@ -49,7 +50,8 @@ const GoalInput = props => {
         < Modal visible={isAddGoal} animationType={"slide"} >
             <View style={styles.topContainer}>
                 <TextInput
-                    placeholder="what do you know about the song?"
+                    placeholder="title"
+                    // placeholder="what do you know about the song?"
                     style={styles.input}
                     onChangeText={inputHandler}
                     value={enteredGoal} />
