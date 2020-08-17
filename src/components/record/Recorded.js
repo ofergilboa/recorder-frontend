@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Audio } from 'expo-av'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { useDispatch } from 'react-redux'
 import getAudioSelectors from '../../redux/selectors/audioSelectors';
 import goalsSelectors from '../../redux/selectors/goalsSelectors';
@@ -14,10 +14,13 @@ moment.locale('en-il')
 
 const Recorded = () => {
 
+    const [random, setRandom] = useState(5)
+
     const dispatch = useDispatch()
     let audio = getAudioSelectors('audio')
     const enteredGoal = goalsSelectors('enteredGoal')
     let recording = {}
+    let isRecording = false
 
     const startRecording = async () => {
         let { status, granted } = await Audio.requestPermissionsAsync()
@@ -31,13 +34,17 @@ const Recorded = () => {
         } catch (error) {
             console.log('2: not recording: ' + error)
         }
+        // setRandom(7)
+        // await console.log(random)
+        isRecording = true
     }
 
     const stopRecording = async () => {
+        console.log(9999 + recording)
         await recording.stopAndUnloadAsync()
         let uri = await recording.getURI()
         let source = { uri: uri }
-        console.log('111111'+ source.uri)
+        console.log('111111' + source.uri)
 
         // console.log('0000 uri: ' + uri)
         console.log('3: stopped recording: ' + recording._finalDurationMillis)
@@ -49,7 +56,7 @@ const Recorded = () => {
         // }, 2000)
 
         let temp = await recording.createNewLoadedSoundAsync()
-        tempAudio = {
+        let tempAudio = {
             sound: temp.sound,
             duration: (recording._finalDurationMillis / 1000).toFixed(1),
             language: 'English',
@@ -58,12 +65,14 @@ const Recorded = () => {
             key: Math.random().toString(),
             date: moment().format('l'),
             hour: moment().format('LTS'),
-            source : source,
+            source: source,
             createdBy: 'userID'
         }
         await setAudioAction(tempAudio, dispatch)
         // await addAudioAction(tempAudio, dispatch)
-        // saveAudioToDB(audio)   
+        // saveAudioToDB(audio)
+
+        isRecording = false
     }
 
     const save = async () => {
@@ -71,18 +80,13 @@ const Recorded = () => {
         saveAudioToDB(audio, dispatch)
     }
 
-
     return (
         <View style={styles.recordBar}>
-            <Text onPress={startRecording}>
-                record
-            </Text>
-            <Text onPress={stopRecording}>
-                stop recording
-            </Text>
-            {/* <Text onPress={save}>
-                save
-            </Text> */}
+            {!isRecording ?
+                <Button color='green' onPress={startRecording} title='record' />
+                : <Button color='red' onPress={stopRecording} title='stop recording' />
+            }
+            <Button color='red' onPress={stopRecording} title='stop recording' />
         </View>
     )
 }
@@ -92,12 +96,13 @@ const styles = StyleSheet.create({
         marginTop: 10,
         paddingVertical: 10,
         paddingHorizontal: 15,
-        backgroundColor: "#b0c4de",
+        backgroundColor: "#f5f5f5",
         // borderRadius: 4,
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: "center",
         width: "100%"
-    }
+    },
+
 })
 
 export default Recorded
