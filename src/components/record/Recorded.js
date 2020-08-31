@@ -20,7 +20,7 @@ const Recorded = () => {
     let audio = getAudioSelectors('audio')
     const enteredGoal = goalsSelectors('enteredGoal')
     let recording = {}
-    let isRecording = false
+    let [isRecording, setIsRecording] = useState(false)
 
     const startRecording = async () => {
         let { status, granted } = await Audio.requestPermissionsAsync()
@@ -36,7 +36,7 @@ const Recorded = () => {
         }
         // setRandom(7)
         // await console.log(random)
-        isRecording = true
+        // setIsRecording(true)
     }
 
     const stopRecording = async () => {
@@ -49,8 +49,8 @@ const Recorded = () => {
         // console.log('0000 uri: ' + uri)
         console.log('3: stopped recording: ' + recording._finalDurationMillis)
 
-        const soundObject = new Audio.Sound()
-        await soundObject.loadAsync(source)
+        // const soundObject = new Audio.Sound()
+        // await soundObject.loadAsync(source)
         // setTimeout(function () {
         //     soundObject.playAsync()
         // }, 2000)
@@ -72,7 +72,7 @@ const Recorded = () => {
         // await addAudioAction(tempAudio, dispatch)
         // saveAudioToDB(audio)
 
-        isRecording = false
+        // setIsRecording(false)
     }
 
     const save = async () => {
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#f5f5f5",
         // borderRadius: 4,
         flexDirection: "row",
-        justifyContent: "center",
+        justifyContent: "space-evenly",
         width: "100%"
     },
 

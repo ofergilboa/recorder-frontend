@@ -49,6 +49,7 @@ export const getAllAudios = async (dispatch) => {
         console.log(error)
     }
     const audios = res.data
+    audios.reverse()
     setAllAudioAction(audios, dispatch)
     console.log('got all audios')
 }

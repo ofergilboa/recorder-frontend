@@ -51,7 +51,6 @@ const GoalInput = props => {
             <View style={styles.topContainer}>
                 <TextInput
                     placeholder="title"
-                    // placeholder="what do you know about the song?"
                     style={styles.input}
                     onChangeText={inputHandler}
                     value={enteredGoal} />
@@ -64,11 +63,19 @@ const GoalInput = props => {
                         <Button title='CANCEL' color='red'
                             onPress={onCancel} />
                     </View>
-                    <View style={styles.button}>
-                        <Button title="SAVE"
-                            onPress={onSave}
-                        />
-                    </View>
+                    {audio ?
+                        <View style={styles.button}>
+                            <Button title="SAVE"
+                                onPress={onSave}
+                            />
+                        </View>
+                        : <View style={styles.button}>
+                            <Button title="SAVE"
+                                color='grey'
+                                onPress={onSave}
+                            />
+                        </View>
+                    }
                 </View>
             </View>
         </Modal >

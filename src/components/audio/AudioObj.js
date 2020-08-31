@@ -3,55 +3,64 @@ import { StyleSheet, Text, View, Touchable, TouchableOpacity, Modal, Button } fr
 import { deleteAudio } from '../../services/services';
 import { useDispatch } from 'react-redux'
 import { Audio } from 'expo-av'
-
+// let source = { uri: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' }
 
 
 const AudioObj = (props) => {
 
-    const [displayObj, setDisplayObj] = useState(false)
-    let [playing, setPlaying] = useState(false)
-    let soundObject = {}
-
     const dispatch = useDispatch()
 
-    const play = async () => {
+    const [displayObj, setDisplayObj] = useState(false)
+    let [playing, setPlaying] = useState(false)
+    // if (!displayObj) {
+    // }
+    let soundObject
+    let source = { uri: props.audio.source }
 
-        // let source = { uri: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' }
-        let source = { uri: props.audio.source }
-        soundObject = new Audio.Sound()
+    const play = async () => {
+        soundObject = await new Audio.Sound()
         try {
             await soundObject.loadAsync(source)
-            console.log('loaded: ' + source.uri)
+            console.log('loaded')
+            // console.log('loaded: ' + source.uri)
         } catch (error) {
             console.log('error: ' + error)
         }
-        soundObject.playAsync()
-        setPlaying(true)
+        await soundObject.playAsync()
+        console.log('playing')
+        // setPlaying(true)
 
         setTimeout(function () {
+            // if (playing) {
             soundObject.stopAsync()
-            setPlaying(false)
+            console.log('stopped playing')
+            // setPlaying(false)
+            // }
         }, props.audio.duration * 1000)
     }
 
+    const stopAudio = async () => {
+        // setPlaying(false)
+        await soundObject.stopAsync()
+        console.log('stopped playing midway')
+    }
+
     const changeDisplayObj = () => {
-        console.log(888888)
         setDisplayObj(!displayObj)
     }
 
-    const stopAudio = async () => {
-        soundObject.stopAsync()
-        console.log('5: stopped plying')
-        setPlaying(false)
+    const onDelete = async () => {
+        await deleteAudio(props.audio.key, dispatch)
+        setDisplayObj(false)
     }
 
     return (
-        <View style={styles.audioObj}>
-            <View style={styles.audioTitle} onPress={changeDisplayObj} accessibilityRole='button' >
+        <View style={styles.audioObj} >
+            <View style={styles.audioTitle} accessibilityRole='button' >
                 <Text style={styles.audioTitleText} onPress={changeDisplayObj} >{props.audio.title}</Text>
                 {/* <Button style={styles.audioTitleText} title={props.audio.title} onPress={changeDisplayObj} /> */}
                 <View style={styles.audioPlay}>
-                    <Text>{props.audio.duration}s</Text>
+                    <Text onPress={changeDisplayObj} style={styles.audioPlayT}>{props.audio.duration}s</Text>
                 </View>
             </View>
             {displayObj ?
@@ -63,7 +72,9 @@ const AudioObj = (props) => {
                     {!playing ? <Text style={styles.play} onPress={() => play()}>play</Text>
                         : <Text style={styles.stop} onPress={() => stopAudio()}>stop</Text>
                     }
-                    <Text style={styles.xButton} onPress={() => deleteAudio(props.audio.key, dispatch)}>delete</Text>
+                    {/* <Text style={styles.play} onPress={() => play()}>play</Text> */}
+                    <Text style={styles.stop} onPress={() => stopAudio()}>stop</Text>
+                    <Text style={styles.xButton} onPress={onDelete}>delete</Text>
                 </View>
                 : null}
         </View>
@@ -74,16 +85,18 @@ const styles = StyleSheet.create({
     audioObj: {
         flexDirection: "column",
         justifyContent: "space-between",
-        paddingVertical: 10,
+        paddingVertical: 12,
         paddingHorizontal: 15,
-        // marginBottom: 10,
-        // backgroundColor: "#f5f5f5",
-        // borderRadius: 4,
+
+        marginBottom: 10,
+        backgroundColor: "#f5f5f5",
+        borderRadius: 4,
         minHeight: 55,
         // borderBottomWidth:1,
-        borderTopWidth: 1,
+        // borderTopWidth: 1,
         borderBottomColor: "#1e90ff",
-        borderTopColor: "#1e90ff",
+        borderTopColor: "black",
+        // borderTopColor: "#a9a9a9",
     },
     audioTitle: {
         // marginBottom: 15,
@@ -93,10 +106,10 @@ const styles = StyleSheet.create({
     },
     audioTitleText: {
         // backgroundColor: "#f5f5f5",
-        color: "#1e90ff",
-        fontSize: 22,
+        // color: "#1e90ff",
+        fontSize: 20,
         // fontWeight:"bold"
-        fontWeight: "bold",
+        // fontWeight: "bold",
         minWidth: 100,
         maxWidth: "75%",
         // paddingHorizontal:10,
@@ -123,10 +136,13 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     audioPlay: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "baseline",
-        width: "10%"
+        width: "15%",
+        alignItems: "flex-end",
+        paddingRight:3,
+        // backgroundColor: 'red'
+    },
+    audioPlayT: {
+        color: "#a9a9a9",
     }
 })
 
